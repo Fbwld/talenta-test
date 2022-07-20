@@ -6,6 +6,7 @@ import DeleteData from "../components/modals/DeleteData";
 import { API } from '../config/api';
 import noproduct from "../assets/images/noproduct.png"
 import logo from "../assets/images/Logo.png"
+import BarChart from '../components/barchart/BarChart'
 
 export default function Landing() {
 const title = 'Landing';
@@ -13,7 +14,7 @@ document.title = 'Talenta Indonesia | ' + title;
 
 let navigate = useNavigate();
 
-const[members,setMembers] = useState([]);
+const [member, setMember] = useState([]);
 const [idDelete, setIdDelete] = useState(null);
 const [confirmDelete, setConfirmDelete] = useState(null);
 
@@ -21,22 +22,19 @@ const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 
-const getMember = async ()=>{
-    const response = await API.get('/members');
-    setMembers(response.data?.data?.data)
-}
-
-// let { data: members, refetch } = useQuery('membersCache', async () => {
-//     const response = await API.get('/members');
-//     console.log(response)
-//     return response.data.data.user.data;
-// });
-const addMember = () => {
+    useEffect(()=>{
+        async function dataMember(){
+        const db = await API.get('/members')
+        return setMember(db.data.data.data)
+        }
+        dataMember();
+    },[])
+    const addMember = () => {
     navigate('/add-member');
 };
 
 const handleUpdate = (id) => {
-    navigate('/edit-product/' + id);
+    navigate('/editcategory/' + id);
 };
 
 const handleDelete = (id) => {
@@ -47,16 +45,11 @@ const handleDelete = (id) => {
 const deleteById = useMutation(async (id) => {
     try {
     await API.delete(`/member/${id}`);
-    getMember();
+    // refetch();
     } catch (error) {
     console.log(error);
     }
 });
-
-useEffect(() => {
-    getMember()
-}, []);
-
 
 useEffect(() => {
     if (confirmDelete) {
@@ -67,6 +60,7 @@ useEffect(() => {
 }, [confirmDelete]);
 
 
+console.log(member)
 return (
     <>
     <Container className="py-5" style={{height:"87vh"}}>
@@ -89,7 +83,7 @@ return (
             </Button>
         </Col>
         <Col xs="12">
-            {members?.length !== 0 ? (
+            {member?.length !== 0 ? (
             <Table striped hover size="lg" className='bg-dark'>
                 <thead>
                 <tr className="text-center">
@@ -103,7 +97,7 @@ return (
                 </tr>
                 </thead>
                 <tbody>
-                {members?.map((item, index) => (
+                {member?.map((item, index) => (
                     <tr key={index}>
                     <td width="3%" className="align-middle text-center">{index + 1}</td>
                     <td width="10%"className="align-middle">
@@ -152,6 +146,7 @@ return (
             )}
         </Col>
         </Row>
+        <BarChart />
     </Container>
     <DeleteData
         setConfirmDelete={setConfirmDelete}

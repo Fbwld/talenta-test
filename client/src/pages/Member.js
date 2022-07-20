@@ -7,7 +7,7 @@ import { Container,
     } from "react-bootstrap";
 import { API } from '../config/api';
 import { UserContext } from '../context/userContext';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from 'react-query';
 import logo from "../assets/images/Logo.png"
 
@@ -53,14 +53,14 @@ const handleChange = (e) => {
 
 return (
     <>
-    <div>
-    <Container className="py-5" style={{height:"88vh"}}>
+    <div className='p-member'>
+    <Container className=" py-5" >
         <Row>
             <Col className='d-flex'>
-            <Col style={{marginRight:"92px"}}>
+            <Col>
                 <Col xs="12">
-                    <img src={logo}/>
-                    <div className="text-header-profile">Add Mmeber</div>
+                    <img className='img-logo' src={logo}/>
+                    <div className="text-header-profile">Add Member</div>
                 </Col>
                 <Col xs="7">
                     <form form onSubmit={(e) => handleSubmit.mutate(e)}>

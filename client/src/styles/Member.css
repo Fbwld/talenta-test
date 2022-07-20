@@ -1,4 +1,13 @@
 .btn-addproduct{
     background: #2C3333 !important;
+}
+.p-member{
+    padding-left: 30%;
+    padding-right: 10%;
+}
+.text-header-profile{
+    margin-left: 160px;
+    color: #2C3333;
+    font-size: 26px;
 
 }

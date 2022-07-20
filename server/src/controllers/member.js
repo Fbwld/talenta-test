@@ -2,13 +2,9 @@ const {member}= require(`../../models`);
 
 exports.addMember = async(req,res)=>{
     try {
-        const id = req.user.id
         const data = req.body
 
-        const createdData = await member.create({
-            ...data,
-            idUser:id
-        })
+        const createdData = await member.create(data);
 
         res.send({
             status:"success",
