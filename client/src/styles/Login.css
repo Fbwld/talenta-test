@@ -1,0 +1,21 @@
+.p-login{
+    margin-top: 90px;
+}
+.login{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.login-name{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2C3333;
+}
+.btn-login{
+    width: 100%;
+    margin-top: 30px;
+    background-color:  #2C3333 !important;
+    border: none !important;
+}
+.btn-login:hover {
+    background-color:#395B64 !important ;
+}
